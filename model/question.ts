@@ -31,7 +31,6 @@ export default class QuestionModel {
     }
 
     get isAnswered(): boolean {
-
         return this.#answers.some(answer => answer.uncovered)
 
         // for (let answer of this.#answers) {
