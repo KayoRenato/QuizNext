@@ -1,3 +1,4 @@
+import shuffle from "../functions/shuffle"
 import AnswerModel from "./answer"
 
 export default class QuestionModel {
@@ -11,7 +12,6 @@ export default class QuestionModel {
         this.#title = title
         this.#answers = answers
         this.#isRight = isRight
-
     }
 
     get id(): number {
@@ -32,12 +32,18 @@ export default class QuestionModel {
 
     get isAnswered(): boolean {
         return this.#answers.some(answer => answer.uncovered)
+    }
 
-        // for (let answer of this.#answers) {
-        //     return answer.uncovered ?? true
-        // }
+    // answeredWith(idx: number): QuestionModel {
+    //     const isCorrect = this.#answers[idx]?.correct
 
-        // return false
+
+    //     return new QuestionModel(this.#id, this.#title, this.)
+    // }
+
+    shuffleAnswers(): QuestionModel {
+        let answersShuffled = shuffle(this.#answers)
+        return new QuestionModel(this.#id, this.#title, answersShuffled, this.#isRight)
     }
 
     toObject() {
