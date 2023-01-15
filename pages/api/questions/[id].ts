@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+// import questionsDB from '../questionsDB'
 
 type Data = {
     id?: number

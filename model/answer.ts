@@ -10,6 +10,14 @@ export default class AnswerModel {
         this.#uncovered = uncovered
     }
 
+    static correct(value: string) {
+        return new AnswerModel(value, true)
+    }
+
+    static incorrect(value: string) {
+        return new AnswerModel(value, false)
+    }
+
     get value(): string {
         return this.#value
     }
