@@ -12,7 +12,7 @@ export default function handler(
 ) {
 
     try {
-        const id = req.query.id ?  +req.query.id : 0
+        const id = req.query.id ? +req.query.id : 0
         const hasQuestion = questionsDB.filter(question => question.id === id)[0]
 
         if (!!hasQuestion) {
