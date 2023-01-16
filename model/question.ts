@@ -4,8 +4,8 @@ import AnswerModel from "./answer"
 export default class QuestionModel {
     #id: number
     #title: string
-    #answers: AnswerModel[]
     #isRight: boolean
+    #answers: AnswerModel[]
 
     constructor(id: number, title: string, answers: AnswerModel[], isRight = false) {
         this.#id = id
@@ -34,12 +34,15 @@ export default class QuestionModel {
         return this.#answers.some(answer => answer.uncovered)
     }
 
-    // answeredWith(idx: number): QuestionModel {
-    //     const isCorrect = this.#answers[idx]?.correct
-
-
-    //     return new QuestionModel(this.#id, this.#title, this.)
-    // }
+    answeredWith(idx: number): QuestionModel {
+        const isCorrect = this.#answers[idx]?.correct
+        const answers = this.#answers.map((answer, i) => {
+            const answerSelected = idx === i
+            const mustReveal = answerSelected || answer.correct
+            return mustReveal ? answer.toUncover() : answer
+        })
+        return new QuestionModel(this.#id, this.#title, answers, isCorrect)
+    }
 
     shuffleAnswers(): QuestionModel {
         let answersShuffled = shuffle(this.#answers)
@@ -50,8 +53,9 @@ export default class QuestionModel {
         return {
             id: this.id,
             title: this.#title,
-            answers: this.#answers.map(answer => answer.toObject()),
-            isRight: this.#isRight
+            isAnswered: this.isAnswered,
+            isRight: this.#isRight,
+            answers: this.#answers.map(answer => answer.toObject())
         }
     }
 

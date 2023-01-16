@@ -3,7 +3,6 @@ export default class AnswerModel {
     #correct: boolean
     #uncovered: boolean
 
-
     constructor(value: string, correct: boolean, uncovered = false) {
         this.#value = value
         this.#correct = correct
@@ -28,6 +27,10 @@ export default class AnswerModel {
 
     get uncovered(): boolean {
         return this.#uncovered
+    }
+
+    toUncover() {
+        return new AnswerModel(this.#value, this.#correct, true)
     }
 
     toObject() {
