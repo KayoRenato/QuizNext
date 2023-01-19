@@ -1,16 +1,34 @@
+import { useState } from "react"
 import Question from "../components/Question"
 import AnswerModel from "../model/answer"
 import QuestionModel from "../model/question"
 
+
+const questionMock = new QuestionModel(1, "What's a Color?", [
+  AnswerModel.incorrect('White'),
+  AnswerModel.incorrect('Blue'),
+  AnswerModel.correct('Green'),
+])
+
 export default function Home() {
 
-  const questionTest = new QuestionModel(1, 'What`s is Color?', [
-    AnswerModel.incorrect('White'),
-    AnswerModel.incorrect('Blue'),
-    AnswerModel.correct('Green'),
-  ])
+  const [question, setQuestion] = useState(questionMock)
+
+  function onResponse(index: number) {
+    setQuestion(question.answeredWith(index))
+  }
 
   return (
-    <Question value={questionTest}/>
+    <div style={
+      {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+      }
+    }>
+      <Question value={question}
+        onResponse={onResponse} />
+    </div>
   )
 }

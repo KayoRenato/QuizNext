@@ -22,7 +22,7 @@ export default class QuestionModel {
         return this.#title
     }
 
-    get answer(): any[] {
+    get answers(): any[] {
         return this.#answers
     }
 

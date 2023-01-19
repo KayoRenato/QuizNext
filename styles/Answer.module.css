@@ -1,0 +1,83 @@
+.answer {
+    display: flex;
+    height: 72px;
+    width: 80%;
+    margin: 8px;
+    min-width: 200px;
+    max-width: 350px;
+}
+
+.contentAnswer {
+    position: relative;
+    display: flex;
+    flex: 1;
+}
+
+
+.frontFlipper {
+    background-color: rgb(155, 178, 196);
+    align-items: center;
+    border-radius: 8px;
+    padding: 8px 16px;
+}
+
+.frontFlipper:hover{
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px 0px rgb(115, 134, 149)
+
+}
+
+.backFlipper {
+
+}
+
+.backFlipper > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #000;
+    background-color: aliceblue;
+}
+
+.correct {
+    border: solid 2px rgb(128, 198, 119);
+}
+
+.incorrect {
+    border: solid 2px rgb(219, 99, 86);
+}
+
+.correct .value, .incorrect .value {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.frontFlipper,
+.backFlipper {
+    position: absolute;
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.letter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-right: 16px;
+}
+
+.value {
+    font-size: 1.3rem;
+
+}
