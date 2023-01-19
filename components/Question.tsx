@@ -2,11 +2,13 @@ import QuestionModel from "../model/question"
 import styles from "../styles/Question.module.css"
 import Answer from "./Answers"
 import Statement from "./Statement"
+import Timer from "./Timer"
 
 
 interface QuestionProps {
     value: QuestionModel
     onResponse: (index: number) => void
+    timeUp: () => void
 }
 
 
@@ -14,11 +16,11 @@ export default function Question(props: QuestionProps) {
     const question = props.value
 
     const letters = [
-        {value: 'A'},
-        {value: 'B'},
-        {value: 'C'},
-        {value: 'D'},
-        {value: 'E'},
+        { value: 'A' },
+        { value: 'B' },
+        { value: 'C' },
+        { value: 'D' },
+        { value: 'E' },
     ]
 
     function renderAnswers() {
@@ -39,6 +41,7 @@ export default function Question(props: QuestionProps) {
     return (
         <div className={styles.question}>
             <Statement text={question.title} />
+            <Timer timeUp={props.timeUp}/>
             {renderAnswers()}
         </div>
     )

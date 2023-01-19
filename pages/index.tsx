@@ -18,6 +18,12 @@ export default function Home() {
     setQuestion(question.answeredWith(index))
   }
 
+  function timeUp() {
+    if (!question.isAnswered) {
+      setQuestion(question.answeredWith(-1))
+    }
+  }
+
   return (
     <div style={
       {
@@ -28,7 +34,8 @@ export default function Home() {
       }
     }>
       <Question value={question}
-        onResponse={onResponse} />
+        onResponse={onResponse}
+        timeUp={timeUp} />
     </div>
   )
 }
