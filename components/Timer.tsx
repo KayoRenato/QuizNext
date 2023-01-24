@@ -10,12 +10,13 @@ export default function Timer(props: TimerProps) {
         <div className={styles.timer}>
             <ProgressTimer
                 color="rgb(219, 99, 86)"
-                duration={2}
+                duration={10}
                 buttonText="Countdown"
                 label="Countdown"
                 onFinish={props.timeUp}
                 rootRounded
                 variant="fill"
+
             />
         </div>
     );

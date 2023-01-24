@@ -1,4 +1,4 @@
-.timer{
+.timer {
     display: flex;
     align-items: baseline;
     height: 100%;
@@ -6,4 +6,3 @@
     position: absolute;
     top: 0;
 }
-
