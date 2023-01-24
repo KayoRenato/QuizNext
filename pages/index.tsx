@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import Button from "../components/Button"
+import Forms from "../components/Forms"
 import Question from "../components/Question"
 import AnswerModel from "../model/answer"
 import QuestionModel from "../model/question"
@@ -30,6 +31,15 @@ export default function Home() {
     }
   }
 
+
+  function nextStep(){
+
+  }
+
+  function answeredQuestion(){
+
+  }
+
   return (
     <div style={
       {
@@ -40,12 +50,13 @@ export default function Home() {
         height: '100vh',
       }
     }>
-      <Question value={question}
-        onResponse={onResponse}
-        timeUp={timeUp}
-        timeToAnswer={5}
+      <Forms 
+        question={question}
+        lastQuestion={false}
+        onSubmit={answeredQuestion}
+        nextStep={nextStep}
+
       />
-      <Button text={"Next"} href='/result'/>
     </div>
   )
 }
