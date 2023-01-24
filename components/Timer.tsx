@@ -16,7 +16,7 @@ export default function Timer(props: TimerProps) {
                 label="Countdown"
                 onFinish={props.timeUp}
                 rootRounded
-                variant="fill" 
+                variant="fill"
 
             />
         </div>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+import Button from "../components/Button"
 import Question from "../components/Question"
 import AnswerModel from "../model/answer"
 import QuestionModel from "../model/question"
@@ -33,6 +34,7 @@ export default function Home() {
     <div style={
       {
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         height: '100vh',
@@ -43,6 +45,7 @@ export default function Home() {
         timeUp={timeUp}
         timeToAnswer={5}
       />
+      <Button text={"Next"} href='/result'/>
     </div>
   )
 }
