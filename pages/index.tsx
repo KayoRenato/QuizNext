@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Question from "../components/Question"
 import AnswerModel from "../model/answer"
 import QuestionModel from "../model/question"
@@ -13,14 +13,19 @@ const questionMock = new QuestionModel(1, "What's a Color?", [
 export default function Home() {
 
   const [question, setQuestion] = useState(questionMock)
+  const questionRef = useRef<QuestionModel>(question)
+
+  useEffect(() => {
+    questionRef.current = question
+  }, [question])
 
   function onResponse(index: number) {
     setQuestion(question.answeredWith(index))
   }
 
   function timeUp() {
-    if (!question.isAnswered) {
-      setQuestion(question.answeredWith(-1))
+    if (!questionRef.current.isAnswered) {
+      setQuestion(questionRef.current.answeredWith(-1))
     }
   }
 
@@ -35,7 +40,9 @@ export default function Home() {
     }>
       <Question value={question}
         onResponse={onResponse}
-        timeUp={timeUp} />
+        timeUp={timeUp}
+        timeToAnswer={5}
+      />
     </div>
   )
 }

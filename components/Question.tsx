@@ -9,6 +9,7 @@ interface QuestionProps {
     value: QuestionModel
     onResponse: (index: number) => void
     timeUp: () => void
+    timeToAnswer?: number
 }
 
 
@@ -41,7 +42,9 @@ export default function Question(props: QuestionProps) {
     return (
         <div className={styles.question}>
             <Statement text={question.title} />
-            <Timer timeUp={props.timeUp}/>
+            <Timer
+                timeUp={props.timeUp}
+                duration={props.timeToAnswer ?? 10} />
             {renderAnswers()}
         </div>
     )

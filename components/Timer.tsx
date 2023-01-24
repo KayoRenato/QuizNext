@@ -3,6 +3,7 @@ import styles from '../styles/Timer.module.css'
 
 interface TimerProps {
     timeUp: () => void
+    duration: number
 }
 
 export default function Timer(props: TimerProps) {
@@ -10,12 +11,12 @@ export default function Timer(props: TimerProps) {
         <div className={styles.timer}>
             <ProgressTimer
                 color="rgb(219, 99, 86)"
-                duration={10}
                 buttonText="Countdown"
+                duration={props.duration}
                 label="Countdown"
                 onFinish={props.timeUp}
                 rootRounded
-                variant="fill"
+                variant="fill" 
 
             />
         </div>
