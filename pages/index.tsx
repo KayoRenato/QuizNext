@@ -12,10 +12,34 @@ const questionMock = new QuestionModel(1, "What's a Color?", [
   AnswerModel.correct('Green'),
 ])
 
+const BASE_URL = 'http://localhost:3000/api'
+
 export default function Home() {
 
-  const [question, setQuestion] = useState(questionMock)
+  const [idsQuestion, setIdsQuestion] = useState<number[]>([])
+  const [question, setQuestion] = useState<QuestionModel>(questionMock)
   const questionRef = useRef<QuestionModel>(question)
+
+  async function onLoadQuestionIds() {
+    const res = await fetch(`${BASE_URL}/forms`)
+    const idsQuestions = await res.json()
+    setIdsQuestion(idsQuestions)
+  }
+
+  useEffect(() => {
+    onLoadQuestionIds()
+  }, [])
+
+  async function onLoadQuestion(idQuestion: number) {
+    const res = await fetch(`${BASE_URL}/questions/${idQuestion}`)
+    const questionJson = await res.json()
+    const newQuestion = QuestionModel.createFromObject(questionJson)
+    setQuestion(newQuestion)
+  }
+
+  useEffect(() => {
+    idsQuestion.length > 0 && onLoadQuestion(idsQuestion[0])
+  }, [idsQuestion])
 
   useEffect(() => {
     questionRef.current = question
@@ -32,31 +56,22 @@ export default function Home() {
   }
 
 
-  function nextStep(){
+  function nextStep() {
 
   }
 
-  function answeredQuestion(){
+  function answeredQuestion() {
 
   }
 
   return (
-    <div style={
-      {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-      }
-    }>
-      <Forms 
-        question={question}
-        lastQuestion={false}
-        onSubmit={answeredQuestion}
-        nextStep={nextStep}
 
-      />
-    </div>
+    <Forms
+      question={question}
+      lastQuestion={false}
+      onSubmit={answeredQuestion}
+      nextStep={nextStep}
+
+    />
   )
 }
