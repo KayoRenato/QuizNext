@@ -1,25 +1,18 @@
 import { useEffect, useRef, useState } from "react"
-import Button from "../components/Button"
 import Forms from "../components/Forms"
-import Question from "../components/Question"
-import AnswerModel from "../model/answer"
 import QuestionModel from "../model/question"
+import { useRouter } from "next/router"
 
-
-const questionMock = new QuestionModel(1, "What's a Color?", [
-  AnswerModel.incorrect('White'),
-  AnswerModel.incorrect('Blue'),
-  AnswerModel.correct('Green'),
-])
 
 const BASE_URL = 'http://localhost:3000/api'
 
 export default function Home() {
 
+  const router = useRouter()
+
   const [idsQuestion, setIdsQuestion] = useState<number[]>([])
-  const [question, setQuestion] = useState<QuestionModel>(questionMock)
+  const [question, setQuestion] = useState<QuestionModel>()
   const [rightAnswered, setRightAnswered] = useState<number>(0)
-  const questionRef = useRef<QuestionModel>(question)
 
   async function onLoadQuestionIds() {
     const res = await fetch(`${BASE_URL}/forms`)
@@ -42,21 +35,19 @@ export default function Home() {
     idsQuestion.length > 0 && onLoadQuestion(idsQuestion[0])
   }, [idsQuestion])
 
-  useEffect(() => {
-    questionRef.current = question
-  }, [question])
-
   function onResponse(index: number) {
     setQuestion(question.answeredWith(index))
   }
 
-  function timeUp() {
-    if (!questionRef.current.isAnswered) {
-      setQuestion(questionRef.current.answeredWith(-1))
-    }
-  }
+  // function timeUp() {
+  //   if (!question.isAnswered) {
+  //     setQuestion(question.answeredWith(-1))
+  //   }
+  // }
 
-  function nextStep() {
+  function idNextQuestion() {
+    const nextIdx = idsQuestion.indexOf(question.id) + 1
+    return idsQuestion[nextIdx]
 
   }
 
@@ -66,14 +57,36 @@ export default function Home() {
     setRightAnswered(rightAnswered + (right ? 1 : 0))
   }
 
-  return (
+  function nextStep() {
+    const nextId = idNextQuestion()
+    nextId ? goNextQuestion(nextId) : finishedQuiz()
+  }
+
+  function goNextQuestion(nextId: number) {
+    onLoadQuestion(nextId)
+  }
+
+  function finishedQuiz() {
+    router.push({
+      pathname: '/result',
+      query: {
+        total: idsQuestion.length,
+        right: rightAnswered
+      }
+    })
+  }
+
+
+
+  return question ? (
 
     <Forms
+      key={question.id}
       question={question}
-      lastQuestion={false}
+      lastQuestion={idNextQuestion() === undefined}
       onSubmit={answeredQuestion}
       nextStep={nextStep}
 
     />
-  )
+  ) : false;
 }

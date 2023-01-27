@@ -30,7 +30,7 @@ export default function Question(props: QuestionProps) {
                 <Answer
                     value={answer}
                     idx={i}
-                    key={i}
+                    key={`${question.id}-${i}`}
                     letter={letters[i].value}
                     letterBackgroundColor='#ffffff'
                     onResponse={props.onResponse}
@@ -43,6 +43,7 @@ export default function Question(props: QuestionProps) {
         <div className={styles.question}>
             <Statement text={question.title} />
             <Timer
+                key={question.id}
                 timeUp={props.timeUp}
                 duration={props.timeToAnswer ?? 10} />
             {renderAnswers()}

@@ -4,6 +4,7 @@ import Question from './Question';
 import Button from './Button';
 
 interface FormsProps {
+    key: any,
     question: QuestionModel,
     lastQuestion: boolean
     onSubmit: (question: QuestionModel) => void
