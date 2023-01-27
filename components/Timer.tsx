@@ -17,7 +17,7 @@ export default function Timer(props: TimerProps) {
                 onFinish={props.timeUp}
                 rootRounded
                 variant="fill"
-                // started={true}
+                started={true}
 
             />
         </div>

@@ -18,6 +18,7 @@ export default function Home() {
 
   const [idsQuestion, setIdsQuestion] = useState<number[]>([])
   const [question, setQuestion] = useState<QuestionModel>(questionMock)
+  const [rightAnswered, setRightAnswered] = useState<number>(0)
   const questionRef = useRef<QuestionModel>(question)
 
   async function onLoadQuestionIds() {
@@ -55,13 +56,14 @@ export default function Home() {
     }
   }
 
-
   function nextStep() {
 
   }
 
-  function answeredQuestion() {
-
+  function answeredQuestion(answeredQuestion: QuestionModel) {
+    setQuestion(answeredQuestion)
+    const right = answeredQuestion.isRight
+    setRightAnswered(rightAnswered + (right ? 1 : 0))
   }
 
   return (
