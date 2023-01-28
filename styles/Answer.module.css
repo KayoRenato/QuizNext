@@ -1,16 +1,18 @@
 .answer {
     display: flex;
-    height: 72px;
-    width: 80%;
+    min-height: 80px;
+    height: 100%;
+    width: 90%;
     margin: 8px;
-    min-width: 200px;
-    max-width: 500px;
+    /* min-width: 200px; */
+    /* max-width: 500px; */
 }
 
 .contentAnswer {
     position: relative;
     display: flex;
     flex: 1;
+    min-width: 80%;
 }
 
 
@@ -79,5 +81,30 @@
 
 .value {
     font-size: 1.3rem;
+
+}
+
+@media only screen and (max-width: 700px) {
+    .contentAnswer { 
+        height: auto;
+    }
+
+    .value  {
+        font-size: 1rem;
+    }
+
+    .correct .value, .incorrect .value  {
+        font-size: 1rem;
+    }
+
+    .letter {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        font-size: 1.3rem;
+        font-weight: 500;
+        margin-right: 16px;
+    }
+    
 
 }
