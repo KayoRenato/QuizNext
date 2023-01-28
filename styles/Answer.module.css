@@ -4,8 +4,7 @@
     height: 100%;
     width: 90%;
     margin: 8px;
-    /* min-width: 200px; */
-    /* max-width: 500px; */
+    perspective: 600px;
 }
 
 .contentAnswer {
@@ -13,6 +12,12 @@
     display: flex;
     flex: 1;
     min-width: 80%;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+}
+
+.contentAnswer.answerUncovered {
+    transform: rotateY(180deg);
 }
 
 
@@ -31,7 +36,7 @@
 }
 
 .backFlipper {
-
+    transform: rotateY(180deg);
 }
 
 .backFlipper > div {
@@ -65,6 +70,8 @@
     display: flex;
     height: 100%;
     width: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .letter {
