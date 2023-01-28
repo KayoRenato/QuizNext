@@ -24,7 +24,7 @@ export default function Forms(props: FormsProps) {
             {props.question ? (
                 <Question
                     value={props.question}
-                    timeToAnswer={600}
+                    timeToAnswer={20}
                     onResponse={onResponse}
                     timeUp={props.nextStep}
                 />
