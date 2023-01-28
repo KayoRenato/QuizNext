@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useRouter } from "next/router"
+import Button from "../components/Button"
+import DisplayStatistic from "../components/DisplayStatistic"
 import styles from '../styles/Result.module.css'
 
 export default function result() {
@@ -11,10 +13,16 @@ export default function result() {
 
     return (
         <div className={styles.result}>
-            <h1>Final Result</h1>
-            <div>Questions Total: {total}</div>
-            <div>Right Answers: {right}</div>
-            <div className={styles.percent}>{`${percent}%`}</div>
+            <div className={styles.card}>
+                <h1 className={styles.title}>Final Result</h1>
+                <div className={styles.statistic}>
+                    <DisplayStatistic value={total} title='Questions Total' />
+                    <DisplayStatistic value={right} colorBG='#9cd2a4' title='Right Answers' />
+                    <DisplayStatistic value={percent} percent={true} title='Accuracy' />
+                </div>
+            </div>
+            <Button href="/" text="Restart" />
         </div>
+
     )
 }
