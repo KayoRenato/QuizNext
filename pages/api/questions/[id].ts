@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import questionsDB from '../questionsDB'
 
-export default (req, res) => {
+export default (req: any, res: any) => {
     const idSelected = +req.query.id
     const hasQuestion = questionsDB.filter(question => question.id === idSelected)
 

@@ -4,7 +4,7 @@ import QuestionModel from "../model/question"
 import { useRouter } from "next/router"
 
 
-const BASE_URL = 'http://localhost:3000/api'
+const BASE_URL = '/api'
 
 export default function Home() {
 
@@ -36,20 +36,17 @@ export default function Home() {
   }, [idsQuestion])
 
   function onResponse(index: number) {
-    setQuestion(question.answeredWith(index))
+    question ? setQuestion(question.answeredWith(index)) : false
   }
-
-  // function timeUp() {
-  //   if (!question.isAnswered) {
-  //     setQuestion(question.answeredWith(-1))
-  //   }
-  // }
 
   function idNextQuestion() {
-    const nextIdx = idsQuestion.indexOf(question.id) + 1
-    return idsQuestion[nextIdx]
-
+    if (question) {
+      const nextIdx = idsQuestion.indexOf(question.id) + 1
+      return idsQuestion[nextIdx]
+    }
+    return false
   }
+
 
   function answeredQuestion(answeredQuestion: QuestionModel) {
     setQuestion(answeredQuestion)
@@ -76,8 +73,6 @@ export default function Home() {
     })
   }
 
-
-
   return question ? (
 
     <Forms
@@ -89,4 +84,5 @@ export default function Home() {
 
     />
   ) : false;
+
 }

@@ -3,7 +3,7 @@
 import questions from "../questionsDB"
 import shuffle from "../../../functions/shuffle"
 
-export default (req, res) => {
+export default function forms(req: any, res: any) {
     const ids = questions.map(question => question.id)
     res.status(200).json(shuffle(ids))
 }

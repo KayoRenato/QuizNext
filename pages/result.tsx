@@ -4,11 +4,11 @@ import Button from "../components/Button"
 import DisplayStatistic from "../components/DisplayStatistic"
 import styles from '../styles/Result.module.css'
 
-export default function result() {
+export default function Result() {
 
     const router = useRouter()
-    const total = +router.query.total
-    const right = +router.query.right
+    const total = router.query.total ? +router.query.total : 0
+    const right = router.query.right ? +router.query.right : 0
     const percent = right / total * 100
 
     return (
